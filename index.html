@@ -1,0 +1,22 @@
+<button onclick="fetchAndDisplayAPIResponse()">API 호출</button>
+<div id="api-response"></div>
+
+<script>
+    async function fetchAndDisplayAPIResponse() {
+    const apiUrl = document.getElementById('api-url').value; // 입력 필드로부터 API 주소 가져오기
+    const apiResponseDiv = document.getElementById('api-response');
+
+    try {
+        const response = await fetch(apiUrl); // API 호출
+        const data = await response.json(); // API 응답을 JSON으로 파싱
+
+        // Prettier 적용하여 응답 데이터를 문자열로 변환
+        const formattedResponse = JSON.stringify(data, null, 2);
+
+        // Prettier 적용된 응답 데이터를 페이지에 표시
+        apiResponseDiv.innerText = formattedResponse;
+    } catch (error) {
+        apiResponseDiv.innerText = 'Error fetching data: ' + error;
+    }
+    }
+</script>
